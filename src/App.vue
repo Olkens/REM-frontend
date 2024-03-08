@@ -1,11 +1,10 @@
 <script setup>
+import LoginForm from "./components/LoginForm.vue";
 
 </script>
 
 <template>
-  <div>
-    hehe
-  </div>
+  <LoginForm />
 </template>
 
 <style scoped>
