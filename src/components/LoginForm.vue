@@ -2,27 +2,39 @@
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
-import {ref} from 'vue'
+import {reactive} from 'vue'
+import axios from "axios";
 
-const username = ref('')
-const password = ref('')
+
+const loginData = reactive({
+  email: '',
+  password: ''
+})
+
+const handleLogin = () => {
+  console.log('login')
+  axios.post('http://localhost:6969/login', loginData).then(res => {
+    console.log(res)
+  }).catch(e => {
+    console.log(e)
+  })
+}
 
 </script>
 
 <template>
   <div>Zaloguj się</div>
-  <form>
+  <form @submit.prevent="handleLogin" >
     <div class="input-container">
       <label for="username">Nazwa użytkownika</label>
-      <InputText id="username" type="text" v-model="username"/>
+      <InputText id="username" type="text" v-model="loginData.email"/>
     </div>
     <div class="input-container">
       <label for="password">Hasło</label>
-      <Password id="password" v-model="password" :feedback="false"/>
+      <Password id="password" v-model="loginData.password" :feedback="false"/>
     </div>
-    <Button label="Submit"/>
+    <Button label="Submit" type="submit"/>
   </form>
-  <p>{{ username }}</p>
 </template>
 
 <style scoped>
