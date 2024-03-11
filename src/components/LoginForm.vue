@@ -11,9 +11,9 @@ const loginData = reactive({
   password: ''
 })
 
-const handleLogin = () => {
+const handleLogin = async () => {
   console.log('login')
-  axios.post('http://localhost:6969/login', loginData).then(res => {
+  await axios.post('http://localhost:6969/login', loginData, { withCredentials: true }).then(res => {
     console.log(res)
   }).catch(e => {
     console.log(e)
